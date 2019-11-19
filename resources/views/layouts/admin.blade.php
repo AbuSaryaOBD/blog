@@ -16,7 +16,8 @@
 
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
 
-
+    @yield('styles')
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,7 +26,7 @@
     <![endif]-->
 
 
-
+    
 
 </head>
 
@@ -99,40 +100,17 @@
 
 
 
-        <div class="navbar-default sidebar" role="navigation">
+        {{-- <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
                             <a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profile</a>
                         </li>
-    
-    
-    
-    
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="">All Posts</a>
-                                </li>
-    
-                                <li>
-                                    <a href="">Create Post</a>
-                                </li>
-    
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-    
-    
-    
-    
-    
                     </ul>
     
                 </div>
     
-            </div>
+            </div> --}}
         <!-- Page Content -->
 
         
@@ -185,7 +163,9 @@
                                 <li>
                                     <a href="{{ route('posts.create') }}">Create Post</a>
                                 </li>
-    
+                                <li>
+                                    <a href="{{ route('comments.index') }}">All Comments</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -215,7 +195,7 @@
                                 </li>
     
                                 <li>
-                                    <a href="{{ route('media.upload') }}">Upload Media</a>
+                                    <a href="{{ route('media.create') }}">Upload Media</a>
                                 </li>
     
                             </ul>
@@ -344,8 +324,9 @@
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>
 
+{{-- @yield('name') --}}
 
-@yield('footer')
+@yield('scripts')
 
 
 

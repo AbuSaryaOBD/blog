@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Post;
+use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AdminCategoriesController extends Controller
+class PostCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        $comments = Comment::all();
+        return view('admin.comments.index',compact('comments'));
     }
 
     /**
@@ -27,7 +29,6 @@ class AdminCategoriesController extends Controller
     public function create()
     {
         //
-        return redirect(route('categories.index'));
     }
 
     /**
@@ -39,11 +40,18 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         //
-        $validatedData = $request->validate([
-            'name' => 'required'
-        ]);
-        Category::create($validatedData);
-        return redirect(route('categories.index'));
+        $user = Auth::user();
+        $data = [ 
+            'post_id'  => $request->post_id,
+            'author'   => $user->name,
+            'email'    => $user->email,
+            'file'     => $user->photo->file,
+            'body'     => $request->body
+        ];
+        Comment::create($data);
+        $request->session()->flash('comment_message','Your comment has been submitted');
+        return redirect()->back();
+        // return $request->all();
     }
 
     /**
@@ -55,6 +63,9 @@ class AdminCategoriesController extends Controller
     public function show($id)
     {
         //
+        $post = Post::findOrFail($id);
+        $comments = $post->comments;
+        return view('admin.comments.show',compact('comments'));
     }
 
     /**
@@ -66,9 +77,6 @@ class AdminCategoriesController extends Controller
     public function edit($id)
     {
         //
-        $cat = Category::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.categories.edit', compact('cat', 'categories'));
     }
 
     /**
@@ -81,12 +89,8 @@ class AdminCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $category = Category::findOrFail($id);
-        $validatedData= $request->validate([
-            'name' => 'required'
-        ]);
-        $category->update($validatedData);
-        return redirect(route('categories.index'));
+        Comment::findOrFail($id)->update($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -98,7 +102,7 @@ class AdminCategoriesController extends Controller
     public function destroy($id)
     {
         //
-        Category::findOrFail($id)->delete();
-        return redirect(route('categories.index'));
+        Comment::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }
