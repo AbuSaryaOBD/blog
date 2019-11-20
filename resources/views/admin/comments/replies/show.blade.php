@@ -2,8 +2,8 @@
 
 @section('content')
   
-    @if (count($comments) > 0)
-        <h1>Comments</h1>
+    @if (count($replies) > 0)
+        <h1>replies</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -17,16 +17,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($comments as $comment)
+                @foreach ($replies as $reply)
                     <tr>
-                        <td>{{ $comment->id }}</td>
-                        <td>{{ $comment->author }}</td>
-                        <td>{{ $comment->email }}</td>
-                        <td>{{ $comment->body }}</td>
-                        <td><a href="{{ route('home.post',$comment->post->id) }}">{{ $comment->post->title }}</a></td>
+                        <td>{{ $reply->id }}</td>
+                        <td>{{ $reply->author }}</td>
+                        <td>{{ $reply->email }}</td>
+                        <td>{{ $reply->body }}</td>
+                        <td><a href="{{ route('home.post',$reply->comment->post->id) }}">{{ $reply->comment->post->title }}</a></td>
                         <td>
-                            @if ($comment->is_active == 1)
-                                <form action="{{ route('comments.update',$comment->id) }}" method="post">
+                            @if ($reply->is_active == 1)
+                                <form action="{{ route('replies.update',$reply->id) }}" method="post">
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="is_active" value="0">
@@ -35,7 +35,7 @@
                                     </div>
                                 </form>
                             @else
-                                <form action="{{ route('comments.update',$comment->id) }}" method="post">
+                                <form action="{{ route('replies.update',$reply->id) }}" method="post">
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="is_active" value="1">
@@ -46,7 +46,7 @@
                             @endif
                         </td>
                         <td>
-                            <form action="{{ route('comments.destroy',$comment->id) }}" method="post">
+                            <form action="{{ route('replies.destroy',$reply->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <div class="form-group">
@@ -59,6 +59,6 @@
             </tbody>
         </table>
     @else
-        <h1 class="text-center">No Comments</h1>
+        <h1 class="text-center">No replies</h1>
     @endif
 @endsection

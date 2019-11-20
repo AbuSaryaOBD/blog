@@ -12,6 +12,7 @@
                 <th>Email</th>
                 <th>Body</th>
                 <th>Post</th>
+                <th>Replies</th>
                 <th>Approval</th>
                 <th>Delete</th>
                 </tr>
@@ -24,6 +25,7 @@
                         <td>{{ $comment->email }}</td>
                         <td>{{ $comment->body }}</td>
                         <td><a href="{{ route('home.post',$comment->post->id) }}">{{ $comment->post->title }}</a></td>
+                        <td><a href="{{ route('replies.show',$comment->id) }}">View Replies</a></td>
                         <td>
                             @if ($comment->is_active == 1)
                                 <form action="{{ route('comments.update',$comment->id) }}" method="post">
