@@ -44,6 +44,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Home</a>
+
         </div>
         <!-- /.navbar-header -->
 
@@ -323,8 +324,6 @@
 
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>
-
-{{-- @yield('name') --}}
 
 @yield('scripts')
 

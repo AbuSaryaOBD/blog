@@ -3,9 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Post extends Model
 {
+    use Sluggable;
+    use SluggableScopeHelpers;
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'onUpdate' => true
+            ]
+        ];
+    }
+
     //
     protected $guarded = [];
 
@@ -29,5 +43,8 @@ class Post extends Model
         return $this->hasMany('App\Comment');
     }
 
-    
+    public function photoPlaceholder()
+    {
+        return '/images/icon-pad.png';
+    }    
 }

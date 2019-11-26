@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+
+    @include('includes.tinyeditor')
+
     <h1>Create Post</h1>
     <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf

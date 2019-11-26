@@ -29,7 +29,7 @@
                        
                         <td>{{ $post->title }}</td>
                         <td>{{ Str::limit($post->body, 10) }}</td>
-                        <td><a href="{{ route('home.post',$post->id) }}" class="btn btn-success">View</a></td>
+                        <td><a href="{{ route('home.post',$post->slug) }}" class="btn btn-success">View</a></td>
                         <td><a href="{{ route('comments.show',$post->id) }}" class="btn btn-info">Comments</a></td>
                         <td>{{ $post->created_at->diffForhumans() }}</td>
                         <td>{{ $post->updated_at->diffForhumans() }}</td>
@@ -37,9 +37,12 @@
                     </tr>
                 @endforeach 
             @endif
-            
-           
-         
         </tbody>
-      </table>
+    </table>
+
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-5">
+          {{ $posts->render() }}
+        </div>
+      </div>
 @endsection
