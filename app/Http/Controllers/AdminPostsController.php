@@ -102,12 +102,12 @@ class AdminPostsController extends Controller
         // return [$request->all(), $post];
 
         $input = $request->all();
-        // $post = Post::findOrFail($id);
-        // $user = User::findOrFail($post->user_id);
+        $post = Post::findOrFail($id);
+        $user = User::findOrFail($post->user_id);
         // if (!$user->isAdmin()) {
         //     $user = User::auth();
         // }
-        $user = Auth::user();// get the logged in user
+        // $user = Auth::user();// get the logged in user
         //عند ترفيع الصورة يتم تفعيل هذا الشرط
         if($file = $request->file('photo_id')){
             $name = time(). $file->getClientOriginalName();
@@ -134,12 +134,5 @@ class AdminPostsController extends Controller
        unlink(public_path() . $post->photo->file);
        $post->delete();
        return redirect(route('posts.index'));
-    }
-
-    public function post($slug)
-    {
-        $post = Post::findBySlugOrFail($slug);
-        $comments = $post->comments()->whereIsActive(1)->get();
-        return view('post',compact('post','comments'));
     }
 }
