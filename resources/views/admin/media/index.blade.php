@@ -9,37 +9,31 @@
         @method('DELETE')
         <div class="form-group">
           <select name="checkBoxArray" class="form-control">
-            <option value="delete">Delete</option>
+            <option value="">Delete</option>
           </select>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Go</button>
+          <input type="submit" class="btn btn-primary ml-1" name="delete_all" value="Go">
         </div>
 
         <table class="table table-hover">
             <thead>
               <tr>
-                <th><input type="checkbox" id="options"></th>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Created</th>
-                <th scope="col">Updated</th>
-                <th scope="col">Delete</th>
+                <th class="text-center"><input type="checkbox" id="options"></th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Created</th>
+                <th class="text-center">Updated</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($photos as $photo)
                   <tr>
-                    <td><input type="checkbox" name="checkBoxArray[]" value="{{ $photo->id }}" class="checkBoxes"></td>
-                    <td scope="row">{{ $photo->id }}</td>
-                    <td><img src="{{ $photo->file }}" alt="" width="100"></td>
-                    <td>{{ $photo->created_at ? $photo->created_at->diffForHumans() : 'no date'}}</td>
-                    <td>{{ $photo->updated_at ? $photo->updated_at->diffForHumans() : 'no date'}}</td>
-                    <td>
-                      <div class="form-group">
-                        <input type="submit" name="delete_single" value="Delete" class="btn btn-danger">
-                      </div>
-                    </td>
+                    <td class="align-middle text-center"><input type="checkbox" name="checkBoxArray[]" value="{{ $photo->id }}" class="checkBoxes"></td>
+                    <td class="align-middle text-center">{{ $photo->id }}</td>
+                    <td class="align-middle text-center"><img src="{{ $photo->file }}" alt="" width="75px" height="75px"></td>
+                    <td class="align-middle text-center">{{ $photo->created_at ? $photo->created_at->diffForHumans() : 'no date'}}</td>
+                    <td class="align-middle text-center">{{ $photo->updated_at ? $photo->updated_at->diffForHumans() : 'no date'}}</td>
                   </tr> 
               @endforeach
             </tbody>

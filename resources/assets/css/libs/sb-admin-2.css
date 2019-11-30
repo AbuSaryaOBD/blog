@@ -132,7 +132,9 @@ body {
         z-index: 1;
         position: absolute;
         width: 250px;
-        margin-top: 51px;
+        /* Modified */
+        /* margin-top: 51px; */
+        /* left: 0; */
     }
 
     .navbar-top-links .dropdown-messages,

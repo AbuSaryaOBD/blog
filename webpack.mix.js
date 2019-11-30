@@ -15,9 +15,8 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
 mix.styles([
-      'resources/assets/css/libs/bootstrap.css',
+      'resources/assets/css/libs/bootstrap.min.css',
       'resources/assets/css/libs/blog-post.css',
-      
       'resources/assets/css/libs/font-awesome.css',
       'resources/assets/css/libs/metisMenu.css',
       'resources/assets/css/libs/sb-admin-2.css',
@@ -25,7 +24,9 @@ mix.styles([
 
 mix.scripts([
    'resources/assets/js/libs/jquery-3.4.1.min.js',
-   'resources/assets/js/libs/bootstrap.js',
+   'resources/assets/js/libs/popper.min.js',
+   'resources/assets/js/libs/bootstrap.min.js',
+   // 'resources/assets/js/libs/bootstrap.bundle.min.js',
    'resources/assets/js/libs/metisMenus.js',
    'resources/assets/js/libs/sb-admin-2.js',
    'resources/assets/js/libs/scripts.js',
